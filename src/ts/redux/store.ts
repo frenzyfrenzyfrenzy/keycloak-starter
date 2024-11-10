@@ -5,8 +5,8 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
 const store = configureStore({
     reducer: {
-        activities: activitiesSlice.reducer,
-        suppliers: suppliersSlice.reducer,
+        activitiesState: activitiesSlice.reducer,
+        suppliersState: suppliersSlice.reducer,
     },
 });
 

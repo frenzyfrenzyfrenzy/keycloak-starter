@@ -14,14 +14,14 @@ const initialState: SuppliersState = {
 }
 
 const suppliersSlice = createSlice({
-    name: 'suppliers',
+    name: 'suppliersState',
     initialState,
     reducers: {
         load: function (state, action: PayloadAction<Supplier[]>) {
-            return {...state, suppliers: action.payload}
+            state.suppliers = action.payload
         },
         clear: function (state, action) {
-            return initialState
+            state.suppliers = []
         }
     },
 });

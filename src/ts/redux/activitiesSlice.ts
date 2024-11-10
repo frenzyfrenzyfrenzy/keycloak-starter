@@ -1,27 +1,30 @@
-import {ActionCreatorWithPayload, CaseReducerActions, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface ActivitiesState {
-    activities: Activity[]
+    byId: { [key: number]: Activity }
 }
 
-interface Activity {
+export interface Activity {
     id: number;
     description: string;
 }
 
 const initialState: ActivitiesState = {
-    activities: []
+    byId: {}
 }
 
 const activitiesSlice = createSlice({
-    name: 'activities',
+    name: 'activitiesState',
     initialState,
     reducers: {
-        load: function (state, action: PayloadAction<Activity[]>) {
-            return {...state, activities: action.payload}
+        load: function (state, action) {
+            let payload = action.payload as Activity[];
+            payload.forEach((activity) => {
+                state.byId[activity.id] = activity
+            })
         },
         clear: function (state, action) {
-            return initialState
+            state.byId = []
         }
     },
 });
