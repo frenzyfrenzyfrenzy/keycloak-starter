@@ -3,7 +3,6 @@ package com.svintsov.backend.domain.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,14 +21,13 @@ public class ImageEntity {
 
     @Id
     @Builder.Default
-    @Column(name = "ID", updatable = false, nullable = false)
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id = UUID.randomUUID();
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Lob
-    @Column(name = "IMAGE_DATA", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "image_data", nullable = false, columnDefinition = "TEXT")
     private String imageData;
 
 }

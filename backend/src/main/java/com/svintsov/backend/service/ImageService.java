@@ -6,25 +6,30 @@ import com.svintsov.backend.domain.entity.ImageEntity;
 import com.svintsov.backend.domain.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Base64;
 import java.util.NoSuchElementException;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ImageService {
 
     private final ImageRepository imageRepository;
 
-    public ImageEntity uploadImage(String name, String content) {
+    public ImageEntity uploadImage(String name, byte[] content) {
+        String encoded = Base64.getEncoder().encodeToString(content);
         return imageRepository.save(ImageEntity.builder()
-                .imageData(content)
+                .imageData(encoded)
                 .name(name)
                 .build());
     }
 
-    public ImageEntity getImage(String name) {
-        return imageRepository.findFirstByName(name)
+    public byte[] getImageAsByteArray(String name) {
+        ImageEntity imageEntity = imageRepository.findFirstByName(name)
                 .orElseThrow(() -> new NoSuchElementException(format("Image with name %s not found", name)));
+        return Base64.getDecoder().decode(imageEntity.getImageData());
     }
 
 }
