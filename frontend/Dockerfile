@@ -1,6 +1,6 @@
 FROM node:20
 WORKDIR /front
-COPY . .
+COPY .. .
 RUN npm install
 RUN npm run build
 
