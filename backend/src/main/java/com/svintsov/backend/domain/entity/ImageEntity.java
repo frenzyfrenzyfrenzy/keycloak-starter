@@ -1,7 +1,9 @@
 package com.svintsov.backend.domain.entity;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,7 @@ public class ImageEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "image_data", nullable = false, columnDefinition = "TEXT")
     private String imageData;
 

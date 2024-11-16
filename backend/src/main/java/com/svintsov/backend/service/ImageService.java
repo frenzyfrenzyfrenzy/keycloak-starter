@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Base64;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -17,6 +18,12 @@ import java.util.NoSuchElementException;
 public class ImageService {
 
     private final ImageRepository imageRepository;
+
+    public List<String> getAllImageNames() {
+        return imageRepository.findAll().stream()
+                .map(ImageEntity::getName)
+                .toList();
+    }
 
     public ImageEntity uploadImage(String name, byte[] content) {
         String encoded = Base64.getEncoder().encodeToString(content);

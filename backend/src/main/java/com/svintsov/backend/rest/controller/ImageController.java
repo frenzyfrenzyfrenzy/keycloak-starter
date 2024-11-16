@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/image")
 public class ImageController {
@@ -22,18 +24,23 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @GetMapping("/{name}")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<String> getAllImageNames() {
+        return imageService.getAllImageNames();
+    }
+
+    @GetMapping(path = "/{name}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) {
         byte[] imageAsByteArray = imageService.getImageAsByteArray(name);
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_PNG)
-                .header(HttpHeaders.CONTENT_DISPOSITION,  format("inline; filename=\"%s\"", name))
+                .header(HttpHeaders.CONTENT_DISPOSITION, format("inline; filename=\"%s\"", name))
                 .body(imageAsByteArray);
     }
 
-    @PutMapping("/{name}")
+    @PutMapping(path = "/{name}", produces = MediaType.TEXT_PLAIN_VALUE)
     public String uploadImage(@RequestBody byte[] imageData, @PathVariable("name") String name) {
-        ImageEntity imageEntity = imageService.uploadImage( name, imageData);
+        ImageEntity imageEntity = imageService.uploadImage(name, imageData);
         return imageEntity.getName();
     }
 }
