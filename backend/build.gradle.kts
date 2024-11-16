@@ -23,6 +23,9 @@ dependencies {
     implementation("org.jetbrains:annotations:26.0.0")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+    implementation("org.keycloak:keycloak-authz-client:26.0.2")
     implementation("org.postgresql:postgresql:42.7.4")
     runtimeOnly("org.liquibase:liquibase-core:4.29.2")
 

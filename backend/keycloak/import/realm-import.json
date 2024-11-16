@@ -63,12 +63,11 @@
     {
       "clientId": "authz-servlet",
       "enabled": true,
-      "baseUrl": "http://localhost:8080/authz-servlet",
-      "adminUrl": "http://localhost:8080/authz-servlet",
+      "baseUrl": "http://localhost:8080/api/auth/codeCallback",
+      "adminUrl": "http://localhost:8080/api/auth/",
       "bearerOnly": false,
       "redirectUris": [
-        "http://localhost:8080/authz-servlet/*",
-        "http://127.0.0.1:8080/authz-servlet/*"
+        "http://localhost:8080/api/auth/*"
       ],
       "secret": "secret",
       "authorizationServicesEnabled": true,
