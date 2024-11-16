@@ -5,7 +5,6 @@ import static java.lang.String.format;
 import com.svintsov.backend.domain.entity.ImageEntity;
 import com.svintsov.backend.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

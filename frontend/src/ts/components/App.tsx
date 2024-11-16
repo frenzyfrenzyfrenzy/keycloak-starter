@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import "../../css/styles.css"
 import {useAppDispatch, useAppSelector} from "../redux/store";
-import {load} from "../redux/activitiesSlice";
+import {Activity, load} from "../redux/activitiesSlice";
 
 const App: React.FC = () => {
 
@@ -13,7 +13,7 @@ const App: React.FC = () => {
     let suppliers = useAppSelector(state => state.suppliersState.suppliers);
 
     useEffect(() => {
-        let activities = Array.from(
+        let activities: Activity[] = Array.from(
             {length: 5},
             (_, k) => ({id: k, description: "desc"}));
         dispatch(load(activities))

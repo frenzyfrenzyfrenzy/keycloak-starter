@@ -16,3 +16,11 @@ services:
     volumes:
       - ./backend/db/init:/docker-entrypoint-initdb.d
 
+  auth:
+    build: ./backend/keycloak
+    depends_on:
+      - db
+    ports:
+      - "8081:8080"
+    command: "start-dev --import-realm"
+

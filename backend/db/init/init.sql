@@ -18,4 +18,9 @@ GRANT CREATE ON SCHEMA app_schema TO app_user;
 GRANT USAGE ON SCHEMA app_schema TO app_user;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA app_schema TO app_user;
 
+create database keycloak_db;
+create user keycloak_user;
+alter user keycloak_user with password 'keycloak_password';
+alter database keycloak_db OWNER TO keycloak_user;
+
 \q
