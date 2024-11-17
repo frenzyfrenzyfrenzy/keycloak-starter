@@ -43,3 +43,16 @@ dependencies {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.register("prepareKotlinBuildScriptModel"){}
+
+tasks.register<Copy>("copyFrontendBundle") {
+    val frontendBuild = project(":frontend").tasks.named("build")
+    dependsOn(frontendBuild)
+    from(project(":frontend").layout.projectDirectory.dir("dist"))
+    into(file("src/main/resources/static"))
+}
+
+tasks.named("processResources") {
+    dependsOn("copyFrontendBundle")
+}

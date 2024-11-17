@@ -38,7 +38,8 @@ public class OAuthConfig {
         http
                 .authorizeHttpRequests((authorize) ->
                         authorize
-                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/**").permitAll()
+                                .requestMatchers("/api/private/**").permitAll()
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(configurer -> configurer.jwt(withDefaults()));
         return http.build();

@@ -1,11 +1,11 @@
 services:
-#  back:
-#    build:
-#      context: backend
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - db
+  back:
+    build:
+      context: backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
 
   db:
     image: postgres:latest
@@ -14,10 +14,10 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./backend/db/init:/docker-entrypoint-initdb.d
+      - ./db/init:/docker-entrypoint-initdb.d
 
   auth:
-    build: ./backend/keycloak
+    build: ./keycloak
     depends_on:
       - db
     ports:
