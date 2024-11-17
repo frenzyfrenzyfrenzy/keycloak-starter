@@ -1,7 +1,6 @@
 services:
   back:
-    build:
-      context: backend
+    image: flexbox-sandbox-back:latest
     ports:
       - "8080:8080"
     depends_on:
@@ -17,7 +16,7 @@ services:
       - ./db/init:/docker-entrypoint-initdb.d
 
   auth:
-    build: ./keycloak
+    build: ./auth
     depends_on:
       - db
     ports:

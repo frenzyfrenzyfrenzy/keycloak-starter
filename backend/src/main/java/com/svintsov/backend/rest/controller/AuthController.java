@@ -45,7 +45,7 @@ public class AuthController {
                 .orElse("");
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/realms/quickstart/protocol/openid-connect/token"))
+                .uri(URI.create("http://auth:8081/realms/quickstart/protocol/openid-connect/token"))
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .POST(HttpRequest.BodyPublishers.ofString(formBody))
                 .build();

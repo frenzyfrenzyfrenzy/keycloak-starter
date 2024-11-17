@@ -1,5 +1,5 @@
 export const getAllImageNames = () => {
-    fetch('http://localhost:8080/api/image',
+    fetch('/api/image',
         {
             method: 'GET',
             credentials: 'include',

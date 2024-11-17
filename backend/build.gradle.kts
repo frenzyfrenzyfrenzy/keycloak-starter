@@ -1,7 +1,10 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
 plugins {
     java
     id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
+    id("com.bmuschko.docker-remote-api") version "9.3.1"
 }
 
 group = "com.svintsov"
@@ -44,7 +47,7 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-tasks.register("prepareKotlinBuildScriptModel"){}
+tasks.register("prepareKotlinBuildScriptModel") {}
 
 tasks.register<Copy>("copyFrontendBundle") {
     val frontendBuild = project(":frontend").tasks.named("build")
@@ -53,6 +56,18 @@ tasks.register<Copy>("copyFrontendBundle") {
     into(file("src/main/resources/static"))
 }
 
+tasks.create("buildDockerImage", DockerBuildImage::class) {
+    inputDir.set(layout.projectDirectory)
+    images.add("flexbox-sandbox-back:latest")
+    dependsOn("assemble")
+    dependsOn("test")
+    dependsOn("copyFrontendBundle")
+}
+
 tasks.named("processResources") {
     dependsOn("copyFrontendBundle")
+}
+
+tasks.named("build") {
+    dependsOn("buildDockerImage")
 }
