@@ -4,7 +4,6 @@ plugins {
     java
     id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
-    id("com.bmuschko.docker-remote-api") version "9.3.1"
 }
 
 group = "com.svintsov"

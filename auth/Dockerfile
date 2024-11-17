@@ -15,7 +15,7 @@ RUN /opt/keycloak/bin/kc.sh build
 
 FROM quay.io/keycloak/keycloak:latest
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
-COPY ../import /opt/keycloak/data/import
+COPY ./import /opt/keycloak/data/import
 
 ENV KC_DB=postgres
 ENV KC_DB_URL=jdbc:postgresql://db:5432/keycloak_db
